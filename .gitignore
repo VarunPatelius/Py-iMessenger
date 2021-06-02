@@ -133,3 +133,5 @@ dmypy.json
 
 # Settings for Visual Studio Code
 .vscode/
+
+src/backend/plugins/dog/doggo.jpg
