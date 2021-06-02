@@ -1,0 +1,13 @@
+altgraph==0.17
+certifi==2020.12.5
+chardet==4.0.0
+geographiclib==1.50
+geopy==2.1.0
+idna==2.10
+jsonpickle==2.0.0
+macholib==1.14
+PyQt5==5.15.4
+PyQt5-Qt5==5.15.2
+PyQt5-sip==12.8.1
+requests==2.25.1
+urllib3==1.26.4
