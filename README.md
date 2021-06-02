@@ -52,10 +52,16 @@ Py-iMessenger supports sending both messages and files:
 * [React](https://docs.python.org/3/library/sqlite3.html) - Used to read the iMessage database
 * [Hibernate](https://www.riverbankcomputing.com/software/pyqt/) - Used to create frontened
 
-## Contributing
-Open for pull requests, please open an issue for any major issues that need to be fixed.
+## Helpful Tips
+When Py-iMessenger runs for the first time, all user data will be automatically loaded into _src/backend/user/savedUser.json_
+along with a couple other config files for things such as API keys and the settings UI, to stop these config files from showing up
+when doing "git status", it would be wise to run the following commands in the project directory:
 
-If you are experiencing an error with an extension you have made try toggling the Testing Mode in the settings of the application.
+```bash
+> git update-index --skip-worktree src/backend/user/savedUser.json
+> git update-index --skip-worktree src/backend/plugins/config.ini
+> git update-index --skip-worktree src/frontend/settings/configUi.ini
+```
 
 ## Documentation
 Documentation regarding how the program works, how to create an extension, and how to use the multitude of features that Py-iMessenger gives to develops, check out the [YouTube channel]()
