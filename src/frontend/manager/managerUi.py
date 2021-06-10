@@ -54,7 +54,7 @@ class ExtensionManager(QDialog):
                         "border-radius:10px;\n"\
                         "color:black;"    
 
-        self.setWindowTitle("PyMessenger Extension Manager")
+        self.setWindowTitle("Py-iMessenger Extension Manager")
         self.setFixedWidth(461)
         self.setFixedHeight(196)
 

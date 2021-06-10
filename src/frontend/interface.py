@@ -37,7 +37,7 @@ class MessengerUI(QDialog):
                         "border-radius:10px;\n"\
                         "color:white;"                                  #Contains the stylesheet for the dark mode GUI
 
-        self.setWindowTitle("PyMessenger")
+        self.setWindowTitle("Py-iMessenger")
         self.setFixedWidth(461)
         self.setFixedHeight(196)
 

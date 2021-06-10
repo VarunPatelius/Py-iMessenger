@@ -33,7 +33,7 @@ class MessengerSettings(QDialog):
                         "border-radius:10px;\n"\
                         "color:black;"                                                      #Contains the default stylesheet for all the components of the settings page
 
-        self.setWindowTitle("PyMessenger Settings")
+        self.setWindowTitle("Py-iMessenger Settings")
         self.setFixedWidth(461)
         self.setFixedHeight(196)
 
