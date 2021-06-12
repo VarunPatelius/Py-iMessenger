@@ -64,7 +64,7 @@ when doing "git status", it would be wise to run the following commands in the p
 ```
 
 ## Documentation
-Documentation regarding how the program works, how to create an extension, and how to use the multitude of features that Py-iMessenger gives to develops, check out the [YouTube channel]()
+Documentation regarding how the program works, how to create an extension, and how to use the multitude of features that Py-iMessenger gives to develops, check out the [YouTube playlist](https://www.youtube.com/playlist?list=PLNtd-r4MGC3eL4dsinuG-RB1gMV5QGbsl)
 
 ## Acknowledgments
 _A special thanks to Annelis Irigoyen for creating the logo._
