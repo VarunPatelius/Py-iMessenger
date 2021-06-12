@@ -49,8 +49,8 @@ Py-iMessenger supports sending both messages and files:
 
 ## Technologies
 * [AppleScript](https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html) - Used to control iMessage
-* [React](https://docs.python.org/3/library/sqlite3.html) - Used to read the iMessage database
-* [Hibernate](https://www.riverbankcomputing.com/software/pyqt/) - Used to create frontened
+* [SQLite3](https://docs.python.org/3/library/sqlite3.html) - Used to read the iMessage database
+* [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) - Used to create frontened
 
 ## Helpful Tips
 When Py-iMessenger runs for the first time, all user data will be automatically loaded into _src/backend/user/savedUser.json_
