@@ -43,8 +43,8 @@ python3 main.py
 
 ## Usage
 Py-iMessenger supports sending both messages and files:
-![File Demo](https://github.com/VarunPatelius/Py-iMessenger/blob/main/github/usage/fileDemo.png?raw=true)
-![Text Demo](https://github.com/VarunPatelius/Py-iMessenger/blob/main/github/usage/messageDemo.png?raw=true)
+
+![Messenger Demo](https://github.com/VarunPatelius/Py-iMessenger/blob/main/github/usage/messengerDemo.gif?raw=true)
 
 
 ## Technologies
