@@ -1,4 +1,5 @@
 from os import system
+import subprocess
 from utils.setupUtils import PROJECT_DIRECTORY
 
 
@@ -25,8 +26,22 @@ class MessengerController:
     def __init__(self):
         self.commands = {}                                  #Creates a dictionary where the key is the command name and the value is the command object
 
+        self.isMonterey = self.isMacVersionMonterey()       #This is used to see if the MacOS version is Monterey, because file sending is not supported
+
         helpExtension = Command("/help", self.helpCommand)  #The help extension is used to show a list of commands and their help messages
         self.commands["/help"] = helpExtension              #The help command is added to the dictionary of all availible commands
+
+
+    def isMacVersionMonterey(self):
+        '''
+        This is used to check to see if the MacOS version is Monterey
+        because file sending capabilities have been compromised
+        '''
+
+        raw = subprocess.check_output(["sw_vers", "-productVersion"])
+        version = raw.decode("utf-8")
+
+        return version.startswith("12")
 
 
     def sendMessage(self, phoneNumber, message):
@@ -52,8 +67,12 @@ class MessengerController:
         commands
         '''
 
-        newCommand = Command(name=commandName, function=commandFunction, helpMessage=commandHelp, fileSending=files)
-        self.commands[newCommand.name] = newCommand
+        if files and (not self.isMonterey):                 #If this is a file sending command and the MacOS version is not Monterey
+            newCommand = Command(name=commandName, function=commandFunction, helpMessage=commandHelp, fileSending=files)
+            self.commands[newCommand.name] = newCommand
+        elif (not files):                                   #If it is not a file sending command then add it anyway
+            newCommand = Command(name=commandName, function=commandFunction, helpMessage=commandHelp, fileSending=files)
+            self.commands[newCommand.name] = newCommand
 
 
     def helpCommand(self, *args):
