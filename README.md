@@ -13,7 +13,7 @@ Py-iMessenger's frontend design takes inspiration from Zeke Snider's [Jared](htt
 ## Installation
 The following steps show how to get Py-iMessenger up and running.
 
-**Be advised, Py-iMessenger is only compatible with MacOS devices which support iMessage, iMessage must be enabled to for the program to run. Running this program on a Windows or Linux device will result in an error message**
+**Be advised, Py-iMessenger is only compatible with MacOS devices which support iMessage, iMessage must be enabled to for the program to run. Running this program on a Windows or Linux device will result in an error message. Furthermore, the program has only been tested with Python3.9**
 
 1. Begin by cloning or downloading the .zip file to your MacOS device
 2. Change directory into the cloned/downloaded folder
