@@ -57,7 +57,10 @@ class MessengerController:
         This is the component that sends the file using applescript and os.system *REQUIRES FILEPATH, NOT MESSAGE*
         '''
         
-        system(f'osascript {PROJECT_DIRECTORY}/src/backend/messenger/fileTexter.applescript "{phoneNumber}" "{filePath}"')
+        if self.isMonterey:
+            system(f'osascript {PROJECT_DIRECTORY}/src/backend/messenger/fileTexterMonterey.applescript "{phoneNumber}" "{filePath}"')
+        else:
+            system(f'osascript {PROJECT_DIRECTORY}/src/backend/messenger/fileTexter.applescript "{phoneNumber}" "{filePath}"')
 
 
     def addExtension(self, commandName, commandFunction, commandHelp="None Provided", files=False):
@@ -67,12 +70,8 @@ class MessengerController:
         commands
         '''
 
-        if files and (not self.isMonterey):                 #If this is a file sending command and the MacOS version is not Monterey
-            newCommand = Command(name=commandName, function=commandFunction, helpMessage=commandHelp, fileSending=files)
-            self.commands[newCommand.name] = newCommand
-        elif (not files):                                   #If it is not a file sending command then add it anyway
-            newCommand = Command(name=commandName, function=commandFunction, helpMessage=commandHelp, fileSending=files)
-            self.commands[newCommand.name] = newCommand
+        newCommand = Command(name=commandName, function=commandFunction, helpMessage=commandHelp, fileSending=files)
+        self.commands[newCommand.name] = newCommand
 
 
     def helpCommand(self, *args):
