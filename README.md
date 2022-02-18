@@ -48,6 +48,7 @@ python3 main.py
 Py-iMessenger supports sending both messages and files:
 
 ![Messenger Demo](https://github.com/VarunPatelius/Py-iMessenger/blob/main/github/usage/messengerDemo.gif?raw=true)
+This demonstration is accurate for all MacOS versions prior to Monterey.
 
 
 ## Technologies
