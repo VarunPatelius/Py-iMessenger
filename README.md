@@ -10,6 +10,8 @@ Py-iMessenger is a simple chatbot that is powered by Python and Applescript. By 
 
 Py-iMessenger's frontend design takes inspiration from Zeke Snider's [Jared](https://github.com/ZekeSnider/Jared), however the backend was written by myself in Python.
 
+Py-iMessenger also supports the ability to send text messages to a iMessage groupchat. When added to a groupchat, all users except the host device will be able to run commands that send texts, image sending is not availible.
+
 ## Installation
 The following steps show how to get Py-iMessenger up and running.
 
@@ -48,6 +50,7 @@ python3 main.py
 Py-iMessenger supports sending both messages and files:
 
 ![Messenger Demo](https://github.com/VarunPatelius/Py-iMessenger/blob/main/github/usage/messengerDemo.gif?raw=true)
+
 This demonstration is accurate for all MacOS versions prior to Monterey.
 
 
