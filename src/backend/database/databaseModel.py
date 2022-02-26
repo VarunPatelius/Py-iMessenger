@@ -43,7 +43,7 @@ class DatabaseController:
 
         try:
             self.cursor.execute(f"SELECT text, cache_roomnames, service, handle_id, ROWID FROM message WHERE text LIKE '/%' AND ROWID > {self.latestCommand}")
-            #Find the text, isFromMe, userId, and rowId from the message table where the text starts with /% and the rowId is greater than that of the latest executed command
+            #Find the text, groupchat ID, platform (SMS/iMessage), userID, and rowId from the message table where the text starts with /% and the rowId is greater than that of the latest executed command
             return self.cursor.fetchone()
 
         except sqlite3.ProgrammingError:

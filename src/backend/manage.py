@@ -98,14 +98,14 @@ class BackendThread(Thread):
 
         commandName = arguments[0]                  #The number is the first thing that should show
         userId = message[-2]
-        messageService = message[-3]
-        chatGUID = message[-4]
+        messageService = message[-3]                #This returns if the message is SMS or iMessage
+        chatGUID = message[-4]                      #A unique identifier for groupchats, will be None if commmand is from private message
         self.database.latestCommand = message[-1]   #This shows the rowId of the latest command and ensures that messages aren't repeated
 
         del arguments[0]
 
-        if (userId != 0) and (messageService == "iMessage"):
-            userToSend = self.allUsers[userId]          #Loads up the user that the response needs to be sent to by using the userId from the message
+        if (userId != 0) and (messageService == "iMessage"):    #Ensures that the message is to a iMessage account/groupchat
+            userToSend = self.allUsers[userId]                  #Loads up the user that the response needs to be sent to by using the userId from the message
 
             self.userController.userEnabler(userObj=userToSend, command=commandName, messaging=self.messenger) #This makes sure that user is enabled and can have commands sent to them
 
@@ -119,7 +119,7 @@ class BackendThread(Thread):
                         self.messenger.sendFile(self.allNumbers[userId], toSend)                                #Send the file with the sendFile method of the messenger
                     else:                                                                                       #Else it will be used for sending text messages
                         toSendCleaned = self.messenger.stringCleaner(toSend)                                    #The message is cleaned to make sure it doesnt make any issues in Bash
-                        self.messenger.sendMessage(self.allNumbers[userId], toSendCleaned, chatGUID)            #Send the message with the sendMessage method of the messenger
+                        self.messenger.sendMessage(self.allNumbers[userId], toSendCleaned, chatGUID)            #Send the message with the sendMessage method of the messenger, also passes in a GC identifier
 
                     self.parentInterface.sent += 1                                                      #Adds to the message counter of the frontend
                     self.parentInterface.messagesSent.setProperty("value", self.parentInterface.sent)   #Sets the value to the counter
@@ -138,7 +138,7 @@ class BackendThread(Thread):
                 except BaseException:                   #Errors are printed out the console, the program will still keep running
                     exception("Exception was thrown.")
 
-            sleep(0.1)                                  #Can be switched to 0.01 for faster response time, but 0.1 is preferred
+            sleep(0.1)                                  #Can be switched to a fast time, but this is recommended to ensure proper message processing
 
 
     def deploymentMode(self):
@@ -154,7 +154,7 @@ class BackendThread(Thread):
                 except:                                 #Errors are not shown and are simply ignored
                     pass
 
-            sleep(0.1)                               #Can be switched to 0.001 for faster response time, but 0.01 is preferred
+            sleep(0.1)                                  #Can be switched to a fast time, but this is recommended to ensure proper message processing
             
 
     def backendRunner(self):

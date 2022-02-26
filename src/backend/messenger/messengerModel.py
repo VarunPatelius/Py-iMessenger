@@ -45,7 +45,9 @@ class MessengerController:
 
     def sendMessage(self, phoneNumber, message, chatGUID):
         '''
-        This is the component that sends the message using applescript and os.system
+        This is the component that sends the message using applescript and os.system.
+        If a valid groupchat identifier is passed in to the function, a text message will be sent
+        to the groupchat
         '''
 
         if chatGUID:
