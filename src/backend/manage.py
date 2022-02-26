@@ -13,7 +13,7 @@ from threading import Thread            #Is inherited to make the BackendThread
 from time import sleep
 from logging import exception           #Used to print out any error messages which may appear while the program is in testing mode
 import sys
-
+from datetime import datetime
 
 userController = userModel.UserController()
 databaseController = databaseModel.DatabaseController()
@@ -98,30 +98,32 @@ class BackendThread(Thread):
 
         commandName = arguments[0]                  #The number is the first thing that should show
         userId = message[-2]
-        isFromMe = message[-3]
+        messageService = message[-3]
+        chatGUID = message[-4]
         self.database.latestCommand = message[-1]   #This shows the rowId of the latest command and ensures that messages aren't repeated
 
         del arguments[0]
 
-        userToSend = self.allUsers[userId]          #Loads up the user that the response needs to be sent to by using the userId from the message
+        if (userId != 0) and (messageService == "iMessage"):
+            userToSend = self.allUsers[userId]          #Loads up the user that the response needs to be sent to by using the userId from the message
 
-        self.userController.userEnabler(userObj=userToSend, command=commandName, messaging=self.messenger) #This makes sure that user is enabled and can have commands sent to them
+            self.userController.userEnabler(userObj=userToSend, command=commandName, messaging=self.messenger) #This makes sure that user is enabled and can have commands sent to them
 
+            if (commandName in self.allCommands) and (userToSend.enabled):                                      #If the command is in the list of all commands and the user is enabled
+                commandToExecute = self.messenger.commands[commandName]                                         #The command name is used to pull up the actual command function that needs to run
+                
+                if commandToExecute.enabled:                                                                    #Checks to see if the command itself has been enabled to send
+                    toSend = commandToExecute.function(*arguments, userToSend)                                  #The function is executed and its return value is saved
 
-        if (commandName in self.allCommands) and (userToSend.enabled):                              #If the command is in the list of all commands and the user is enabled
-            commandToExecute = self.messenger.commands[commandName]                                 #The command name is used to pull up the actual command function that needs to run
-            if commandToExecute.enabled:                                                            #Checks to see if the command itself has been enabled to send
-                toSend = commandToExecute.function(*arguments, userToSend)                          #The function is executed and its return value is saved
+                    if commandToExecute.fileSending:                                                            #If the command is used for sending files
+                        self.messenger.sendFile(self.allNumbers[userId], toSend)                                #Send the file with the sendFile method of the messenger
+                    else:                                                                                       #Else it will be used for sending text messages
+                        toSendCleaned = self.messenger.stringCleaner(toSend)                                    #The message is cleaned to make sure it doesnt make any issues in Bash
+                        self.messenger.sendMessage(self.allNumbers[userId], toSendCleaned, chatGUID)            #Send the message with the sendMessage method of the messenger
 
-                if commandToExecute.fileSending:                                                    #If the command is used for sending files
-                    self.messenger.sendFile(self.allNumbers[userId], toSend)                        #Send the file with the sendFile method of the messenger
-                else:                                                                               #Else it will be used for sending text messages
-                    toSendCleaned = self.messenger.stringCleaner(toSend)                            #The message is cleaned to make sure it doesnt make any issues in Bash
-                    self.messenger.sendMessage(self.allNumbers[userId], toSendCleaned)              #Send the message with the sendMessage method of the messenger
-
-                self.parentInterface.sent += 1                                                      #Adds to the message counter of the frontend
-                self.parentInterface.messagesSent.setProperty("value", self.parentInterface.sent)   #Sets the value to the counter
-
+                    self.parentInterface.sent += 1                                                      #Adds to the message counter of the frontend
+                    self.parentInterface.messagesSent.setProperty("value", self.parentInterface.sent)   #Sets the value to the counter
+                
 
     def testingMode(self):
         while True:
@@ -152,7 +154,7 @@ class BackendThread(Thread):
                 except:                                 #Errors are not shown and are simply ignored
                     pass
 
-            sleep(0.0055)                               #Can be switched to 0.001 for faster response time, but 0.0055 is preferred
+            sleep(0.1)                               #Can be switched to 0.001 for faster response time, but 0.01 is preferred
             
 
     def backendRunner(self):

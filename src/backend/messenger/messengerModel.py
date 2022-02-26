@@ -1,4 +1,3 @@
-from os import system
 import subprocess
 from utils.setupUtils import PROJECT_DIRECTORY
 
@@ -44,12 +43,15 @@ class MessengerController:
         return version.startswith("12")
 
 
-    def sendMessage(self, phoneNumber, message):
+    def sendMessage(self, phoneNumber, message, chatGUID):
         '''
         This is the component that sends the message using applescript and os.system
         '''
 
-        subprocess.run(["osascript", f"{PROJECT_DIRECTORY}/src/backend/messenger/messageTexter.applescript", phoneNumber, message])
+        if chatGUID:
+            subprocess.run(["osascript", f"{PROJECT_DIRECTORY}/src/backend/messenger/groupMessageTexter.applescript", f"iMessage;+;{chatGUID}", message])
+        else:
+            subprocess.run(["osascript", f"{PROJECT_DIRECTORY}/src/backend/messenger/messageTexter.applescript", phoneNumber, message])
 
 
     def sendFile(self, phoneNumber, filePath):
@@ -107,5 +109,5 @@ class MessengerController:
         to execute the applescript from the terminal (which has special characters)
         '''
 
-        cleaned = f" {toSend} "                                                         #This spacing is added to ensure that a command wont end up running and infinite loop                                            
-        return cleaned.replace("\"", "\\<.>\"").replace("<.>", "").replace("$", "\$")   #Replaces "$" and "\" which are commonly used in bash
+        cleaned = f" {toSend} "                                 #This spacing is added to ensure that a command wont end up running and infinite loop                                            
+        return cleaned.replace('"', '\"').replace("$", "\$")    #Replaces "$" and "\" which are commonly used in bash
