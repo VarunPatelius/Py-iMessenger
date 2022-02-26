@@ -49,7 +49,7 @@ class MessengerController:
         This is the component that sends the message using applescript and os.system
         '''
 
-        system(f'osascript {PROJECT_DIRECTORY}/src/backend/messenger/messageTexter.applescript "{phoneNumber}" "{message}"')
+        subprocess.run(["osascript", f"{PROJECT_DIRECTORY}/src/backend/messenger/messageTexter.applescript", phoneNumber, message])
 
 
     def sendFile(self, phoneNumber, filePath):
@@ -58,9 +58,9 @@ class MessengerController:
         '''
         
         if self.isMonterey:
-            system(f'osascript {PROJECT_DIRECTORY}/src/backend/messenger/fileTexterMonterey.applescript "{phoneNumber}" "{filePath}"')
+            subprocess.run(["osascript", f"{PROJECT_DIRECTORY}/src/backend/messenger/fileTexterMonterey.applescript", phoneNumber, filePath])
         else:
-            system(f'osascript {PROJECT_DIRECTORY}/src/backend/messenger/fileTexter.applescript "{phoneNumber}" "{filePath}"')
+            subprocess.run(["osascript", f"{PROJECT_DIRECTORY}/src/backend/messenger/fileTexter.applescript", phoneNumber, filePath])
 
 
     def addExtension(self, commandName, commandFunction, commandHelp="None Provided", files=False):

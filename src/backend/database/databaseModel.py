@@ -1,5 +1,4 @@
 import sqlite3
-from os import system, path
 from getpass import getuser #Used to retrieve the user name of the logged in user to access the iMessage database
 
 
