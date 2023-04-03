@@ -25,13 +25,13 @@ class MessengerController:
     def __init__(self):
         self.commands = {}                                  #Creates a dictionary where the key is the command name and the value is the command object
 
-        self.isMonterey = self.isMacVersionMonterey()       #This is used to see if the MacOS version is Monterey, because file sending is not supported
+        self.isMonterey = self.isMacVersionMontereyOrVentura()  #This is used to see if the MacOS version is Monterey, because file sending is not supported
 
         helpExtension = Command("/help", self.helpCommand)  #The help extension is used to show a list of commands and their help messages
         self.commands["/help"] = helpExtension              #The help command is added to the dictionary of all availible commands
 
 
-    def isMacVersionMonterey(self):
+    def isMacVersionMontereyOrVentura(self):
         '''
         This is used to check to see if the MacOS version is Monterey
         because file sending capabilities have been compromised
@@ -40,7 +40,7 @@ class MessengerController:
         raw = subprocess.check_output(["sw_vers", "-productVersion"])
         version = raw.decode("utf-8")
 
-        return version.startswith("12")
+        return version.startswith("12") or version.startswith("13")
 
 
     def sendMessage(self, phoneNumber, message, chatGUID):
