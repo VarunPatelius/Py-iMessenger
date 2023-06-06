@@ -5,7 +5,7 @@ Py-iMessenger is a chatbot that works with iMessage to execute commands using te
 # Important
 It appears that after upgrading to MacOS Monetery, Py-iMessenger has lost the ability to send files (images, videos, etc.) using Applescript. You can check out the problem [here](https://apple.stackexchange.com/questions/429586/applescript-messages-app-monterey-problem). **With the newest commit, Py-iMessenger will check to see the MacOS version and will use GUI programming to actually open the Messages app, paste the file, and send it. This decreases performance signficantly and does not work all of the time.**
 
-**Py-iMessenger is completely broken with MacOS Venture. As far as I can tell, the database is no longer being updated with messages and frankly I've lost the energy to continue with this project.**
+**Py-iMessenger is completely broken with MacOS Ventura. As far as I can tell, the database is no longer being updated with messages and frankly I've lost the energy to continue with this project. As of 06/05/23 I have tried accessing the iMessage DB as it shows that is updating but when trying to view the messages some appear as NULL until the entire database itself is copied and pasted elsewhere.**
 
 ## About
 Py-iMessenger is a simple chatbot that is powered by Python and Applescript. By reading from the iMessage database on MacOS devices, Py-iMessenger allows developers to create extensions that can do various tasks such as sending files, pulling up the recent news, or adding to a todo list. These extensions can be accessed by users simply through texting.
